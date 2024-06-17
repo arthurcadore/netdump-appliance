@@ -28,6 +28,16 @@ services:
     env_file:
       - ./db/.env_db
 
+  nfdump:
+    container_name: nf-dump
+    build:
+      context: ./db/ 
+    volumes:
+      - netsage_data:/data/nfdump
+    ports:
+      - "2055:2055/udp"
+    command: "nfcapd -T all -l /data/nfdump -p 2055"
+
 volumes:
   grafanadata:
   grafanaetc:

@@ -1,0 +1,1 @@
+FROM netsage/nfdump-collector:alpine-1.6.23
