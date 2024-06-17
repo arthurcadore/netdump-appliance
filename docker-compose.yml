@@ -1,0 +1,35 @@
+version: '3'
+services:
+  nf-grafana:
+    container_name: nf-grafana
+    build:
+      context: ./grafana/
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafanaetc:/var/lib/grafana
+      - grafanadata:/etc/grafana
+    restart: always 
+    user: "1000:1000"
+    env_file:
+      - ./grafana/.env_grafana
+    depends_on:
+      - database
+  
+  nf-database:
+    container_name: nf-database
+    build:
+      context: ./db/ 
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always 
+    env_file:
+      - ./db/.env_db
+
+volumes:
+  grafanadata:
+  grafanaetc:
+  dbdata:
+ 
