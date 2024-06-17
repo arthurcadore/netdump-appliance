@@ -29,26 +29,25 @@ services:
     env_file:
       - ./db/.env_db  # Check path if needed
 
-  nfdump:
-    container_name: nf-dump
-    build:
-      context: ./nfdump/
-    volumes:
-      - nfdumpdata:/data/nfdump
-    ports:
-      - "2055:2055/udp"
-    command: "nfcapd -T all -l /data/nfdump -p 2055"
+#  nfdump:
+#    container_name: nf-dump
+#    build:
+#      context: ./nfdump/
+#    volumes:
+#      - nfdumpdata:/data/nfdump
+#    ports:
+#      - "2055:2055/udp"
+#    command: "nfcapd -T all -l /data/nfdump -p 2055"
 
   nfexporter:
     container_name: nf-exporter
     build:
       context: ./nfexporter/
     volumes:
-      - nfdumpdata:/data/
+      - "./nfexporter/nfexporter.py"
     command: "tail -f /dev/null;"  # Add semicolon
 
 volumes:
   grafanadata:
   grafanaetc:
   dbdata:
-  nfdumpdata:
