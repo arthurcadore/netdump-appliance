@@ -1,8 +1,8 @@
 version: '3'
-services:
 
-  nf-grafana:
-    container_name: nf-grafana
+services:
+  grafana:  # Descriptive name
+    container_name: grafana-container  # Descriptive name
     build:
       context: ./grafana/
     ports:
@@ -10,29 +10,29 @@ services:
     volumes:
       - grafanaetc:/var/lib/grafana
       - grafanadata:/etc/grafana
-    restart: always 
+    restart: always
     user: "1000:1000"
     env_file:
-      - ./grafana/.env_grafana
+      - ./grafana/.env_grafana  # Check path if needed
     depends_on:
       - database
-  
-  nf-database:
-    container_name: nf-database
+
+  database:  # Descriptive name
+    container_name: mysql-container  # Descriptive name
     build:
-      context: ./db/ 
+      context: ./db/
     ports:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
-    restart: always 
+    restart: always
     env_file:
-      - ./db/.env_db
+      - ./db/.env_db  # Check path if needed
 
   nfdump:
     container_name: nf-dump
     build:
-      context: ./nfdump/ 
+      context: ./nfdump/
     volumes:
       - nfdumpdata:/data/nfdump
     ports:
@@ -45,12 +45,10 @@ services:
       context: ./nfexporter/
     volumes:
       - nfdumpdata:/data/
-     command: "tail -f /dev/null"
-    
+    command: "tail -f /dev/null;"  # Add semicolon
+
 volumes:
   grafanadata:
   grafanaetc:
   dbdata:
   nfdumpdata:
-  
- 
