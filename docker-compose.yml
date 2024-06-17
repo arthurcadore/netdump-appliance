@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   nf-grafana:
     container_name: nf-grafana
     build:
@@ -31,15 +32,25 @@ services:
   nfdump:
     container_name: nf-dump
     build:
-      context: ./db/ 
+      context: ./nfdump/ 
     volumes:
-      - netsage_data:/data/nfdump
+      - nfdumpdata:/data/nfdump
     ports:
       - "2055:2055/udp"
     command: "nfcapd -T all -l /data/nfdump -p 2055"
 
+  nfexporter:
+    container_name: nf-exporter
+    build:
+      context: ./nfexporter/
+    volumes:
+      - nfdumpdata:/data/
+     command: "tail -f /dev/null"
+    
 volumes:
   grafanadata:
   grafanaetc:
   dbdata:
+  nfdumpdata:
+  
  
