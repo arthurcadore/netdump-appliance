@@ -46,7 +46,7 @@ services:
     ports:
       - "2000:2000/udp"
     volumes:
-      - "./nfexporter/nfexporter.py"
+      - "./nfexporter/nfexporter.py:/startup/nfexporter.py"
     command: "tail -f /dev/null;"  # Add semicolon
 
 volumes:
