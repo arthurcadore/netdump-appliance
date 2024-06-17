@@ -43,6 +43,8 @@ services:
     container_name: nf-exporter
     build:
       context: ./nfexporter/
+    ports:
+      - "2000:2000/udp"
     volumes:
       - "./nfexporter/nfexporter.py"
     command: "tail -f /dev/null;"  # Add semicolon
