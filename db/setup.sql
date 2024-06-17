@@ -8,7 +8,7 @@ CREATE TABLE tabela_netflow (
         proto INT NOT NULL,
         packets INT NOT NULL,
         bytes BIGINT NOT NULL,
-        duration INT NOT NULL
+        duration INT NOT NULL,
 	    PRIMARY KEY (id)
 );
 
