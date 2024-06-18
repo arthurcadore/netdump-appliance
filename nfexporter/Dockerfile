@@ -10,7 +10,8 @@ RUN apt-get install -y \
             python3-dev \
             default-libmysqlclient-dev \
             build-essential \
-            pkg-config
+            pkg-config \
+            default-mysql-client 
     
 RUN pip install mysqlclient
 
