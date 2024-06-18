@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  grafana:  # Descriptive name
-    container_name: grafana-container  # Descriptive name
+  grafana: 
+    container_name: grafana-container  
     build:
       context: ./grafana/
     ports:
@@ -13,12 +13,12 @@ services:
     restart: always
     user: "1000:1000"
     env_file:
-      - ./grafana/.env_grafana  # Check path if needed
+      - ./grafana/.env_grafana 
     depends_on:
       - database
 
-  database:  # Descriptive name
-    container_name: mysql-container  # Descriptive name
+  database: 
+    container_name: mysql-container  
     build:
       context: ./db/
     ports:
@@ -27,27 +27,17 @@ services:
       - dbdata:/var/lib/mysql
     restart: always
     env_file:
-      - ./db/.env_db  # Check path if needed
-
-#  nfdump:
-#    container_name: nf-dump
-#    build:
-#      context: ./nfdump/
-#    volumes:
-#      - nfdumpdata:/data/nfdump
-#    ports:
-#      - "2055:2055/udp"
-#    command: "nfcapd -T all -l /data/nfdump -p 2055"
+      - ./db/.env_db  
 
   nfexporter:
     container_name: nf-exporter
     build:
       context: ./nfexporter/
     ports:
-      - "2000:2000/udp"
+      - "2005:2005/udp"
     volumes:
       - "./nfexporter/nfexporter.py:/startup/nfexporter.py"
-    command: "tail -f /dev/null;"  # Add semicolon
+    command: "tail -f /dev/null;"  
 
 volumes:
   grafanadata:

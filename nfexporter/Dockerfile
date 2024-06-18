@@ -1,13 +1,11 @@
-FROM python:3.12-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:22.04
 
-RUN apt-get update && apt-get clean
+RUN apt-get update && \
+    apt-get install -y nfdump net-tools && \
+    apt-get clean
 
-RUN apt-get install -y \
-            python3-dev \
-            default-libmysqlclient-dev \
-            build-essential \
-            pkg-config
+COPY nfexporter.sh /usr/local/bin/nfexporter.sh
+RUN chmod +x /usr/local/bin/nfexporter.sh
 
-RUN pip install mysqlclient
+CMD ["sh", "-c", "/usr/local/bin/nfexporter.sh"]
