@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/bash
 
 python3 /data/nf2csv.py & 
 
