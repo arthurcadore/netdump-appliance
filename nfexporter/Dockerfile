@@ -14,4 +14,4 @@ RUN apt-get install -y \
     
 RUN pip install mysqlclient
 
-CMD ["tail -f /dev/null"]
+CMD ["tail", "-f", "/dev/null"]

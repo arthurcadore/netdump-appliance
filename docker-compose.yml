@@ -42,7 +42,7 @@ services:
   nfexporter:
     container_name: nf-exporter
     volumes:
-      - nfdumpdata:/data/raw:ro
+      - nfdumpdata:/data/raw
     build:
       context: ./nfexporter/
 
