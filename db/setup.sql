@@ -51,14 +51,14 @@ CREATE TABLE tabela_netflow (
     tr DATETIME
 );
 
-CREATE TABLE tabela_summary (
-    flows INT,
-    bytes INT,
-    packets INT,
-    avg_bps INT,
-    avg_pps INT,
-    avg_bpp INT
-);
+-- CREATE TABLE tabela_summary (
+--     flows INT,
+--     bytes INT,
+--     packets INT,
+--     avg_bps INT,
+--     avg_pps INT,
+--     avg_bpp INT
+-- );
 
 
 -- Crie o usuário
