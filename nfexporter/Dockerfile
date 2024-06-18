@@ -16,4 +16,9 @@ RUN pip install mysqlclient
 
 RUN mkdir -p /data/csv
 
-CMD ["tail", "-f", "/dev/null"]
+# Add startup script to container:
+COPY nfexporter/startup.sh /usr/sbin/startup.sh
+RUN chmod +x /usr/sbin/startup.sh
+    
+# Starts and Mantain container running:
+CMD ["/usr/sbin/startup.sh"]

@@ -43,6 +43,7 @@ services:
     container_name: nf-exporter
     volumes:
       - nfdumpdata:/data/raw
+      - "./nfexporter/nf2csv.py:/data/nf2csv.py"
     build:
       context: ./nfexporter/
 
