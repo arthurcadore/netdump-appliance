@@ -2,4 +2,4 @@
 
 python3 /data/nf2csv.py & 
 
-tail -f /dev/null 
+python3 /data/csv2db.py 
