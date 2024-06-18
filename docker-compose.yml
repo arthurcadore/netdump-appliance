@@ -37,16 +37,14 @@ services:
       - nfdumpdata:/data/nfdump
     ports:
       - "2055:2055/udp"
+    command: ""
 
-#  nfexporter:
-#    container_name: nf-exporter
-#    build:
-#      context: ./nfexporter/
-#    ports:
-#      - "2005:2005/udp"
-#    volumes:
-#      - "./nfexporter/nfexporter.py:/startup/nfexporter.py"
-#    command: "tail -f /dev/null;"  
+  nfexporter:
+    container_name: nf-exporter
+    volumes:
+      - nfdumpdata:/data/raw:ro
+    build:
+      context: ./nfexporter/
 
 volumes:
   grafanadata:
