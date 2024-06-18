@@ -41,11 +41,12 @@ services:
 
   nfexporter:
     container_name: nf-exporter
+    build:
+      context: .
+      dockerfile: ./nfexporter/Dockerfile
     volumes:
       - nfdumpdata:/data/raw
       - "./nfexporter/nf2csv.py:/data/nf2csv.py"
-    build:
-      context: ./nfexporter/
 
 volumes:
   grafanadata:
