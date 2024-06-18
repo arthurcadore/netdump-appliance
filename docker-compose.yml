@@ -29,15 +29,24 @@ services:
     env_file:
       - ./db/.env_db  
 
-  nfexporter:
-    container_name: nf-exporter
+  nfdump:
+    container_name: nf-dump
     build:
-      context: ./nfexporter/
-    ports:
-      - "2005:2005/udp"
+      context: ./nfdump/
     volumes:
-      - "./nfexporter/nfexporter.py:/startup/nfexporter.py"
-    command: "tail -f /dev/null;"  
+      - nfdumpdata:/data/nfdump
+    ports:
+      - "2055:2055/udp"
+
+#  nfexporter:
+#    container_name: nf-exporter
+#    build:
+#      context: ./nfexporter/
+#    ports:
+#      - "2005:2005/udp"
+#    volumes:
+#      - "./nfexporter/nfexporter.py:/startup/nfexporter.py"
+#    command: "tail -f /dev/null;"  
 
 volumes:
   grafanadata:
