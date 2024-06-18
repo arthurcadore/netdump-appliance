@@ -14,4 +14,6 @@ RUN apt-get install -y \
     
 RUN pip install mysqlclient
 
+RUN mkdir -p /data/csv
+
 CMD ["tail", "-f", "/dev/null"]
