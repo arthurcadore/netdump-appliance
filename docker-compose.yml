@@ -47,6 +47,7 @@ services:
     volumes:
       - nfdumpdata:/data/raw
       - "./nfexporter/nf2csv.py:/data/nf2csv.py"
+      - "./nfexporter/csv2db.py:/data/csv2db.py"
 
 volumes:
   grafanadata:
