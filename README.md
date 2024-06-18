@@ -1,5 +1,6 @@
 # netdump-appliance
 
+![main](./templates/pictures/nfMonitoringV1.png)
 
 ts: Timestamp de início da conexão.
 te: Timestamp de término da conexão.
