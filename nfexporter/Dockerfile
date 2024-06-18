@@ -14,6 +14,8 @@ RUN apt-get install -y \
     
 RUN pip install mysqlclient
 
+RUN pip install --no-cache-dir mysql-connector-python
+
 RUN mkdir -p /data/csv
 
 # Add startup script to container:
