@@ -2,7 +2,7 @@
 
 **This repository structures a deployment of NetFlow components (nfdump 1.6.23), Grafana (9.3.2), and Database (MySQL 8.0.34) for NetFlow data processing and presentation.**
 
-![main](./templates/pictures/nfDashboardV1.png)
+![main](./templates/pictures/main.png)
 
 ---
 Prerequisites
@@ -162,7 +162,7 @@ mysql://localhost:3306
 A template is avaliable to download at `./templates/`, so you can inport it into grafana and use the mysql as ilustrated below: 
 
 
-![main](./templates/pictures/nfDashboardV1.png)
+![main](./templates/pictures/main.png)
 
 --- 
 ### Stop Containers: 
