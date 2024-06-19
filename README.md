@@ -1,6 +1,18 @@
 # netdump-appliance
 
-![main](./templates/pictures/nfMonitoringV1.png)
+![main](./templates/pictures/nfDashboardV1.png)
+
+
+```mermaid
+flowchart TD
+    A([NfCap Deamon]) -->|Binary Files| B([NfDump]) 
+    B -->|CSV Files| D([NfExporter])
+    D -->|Mysql Queries| C([Database])
+    C -->|Mysql Queries| E([Grafana])
+```
+
+Descrição dos campos: 
+
 
 ts: Timestamp de início da conexão.
 te: Timestamp de término da conexão.
