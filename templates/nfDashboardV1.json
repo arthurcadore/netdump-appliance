@@ -332,7 +332,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -456,7 +456,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -677,7 +677,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -708,7 +708,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
+        "w": 9,
         "x": 0,
         "y": 7
       },
@@ -830,7 +830,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -861,8 +861,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 8,
+        "w": 9,
+        "x": 9,
         "y": 7
       },
       "id": 16,
@@ -989,8 +989,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 16,
+        "w": 6,
+        "x": 18,
         "y": 7
       },
       "id": 11,
@@ -1111,13 +1111,13 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 8,
+        "w": 9,
         "x": 0,
         "y": 15
       },
@@ -1235,7 +1235,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -1266,8 +1266,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 8,
-        "x": 8,
+        "w": 9,
+        "x": 9,
         "y": 15
       },
       "id": 17,
@@ -1394,8 +1394,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 8,
-        "x": 16,
+        "w": 6,
+        "x": 18,
         "y": 15
       },
       "id": 12,
@@ -1511,6 +1511,6 @@
   "timezone": "",
   "title": "Net-Flow Monitoring",
   "uid": "Tk_2cwUIk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
