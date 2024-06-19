@@ -126,7 +126,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT COUNT(*) FROM tabela_netflow;",
+          "rawSql": "SELECT COUNT(*) FROM tabela_netflow\r\nWHERE ra = '$DeviceAddr';",
           "refId": "A",
           "sql": {
             "columns": [
@@ -250,7 +250,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT tr AS time,\r\n          ibyt, \r\n          obyt\r\nFROM tabela_netflow\r\nWHERE ra = '$DeviceAddr'",
+          "rawSql": "SELECT tr AS time,\r\n          ibyt, \r\n          obyt\r\nFROM tabela_netflow\r\nWHERE ra = '$DeviceAddr';\r\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -373,7 +373,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT pr, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE pr != '0'\r\nGROUP BY pr\r\nLIMIT 5;",
+          "rawSql": "SELECT pr, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE pr != '0' AND ra = '$DeviceAddr'\r\nGROUP BY pr\r\nLIMIT 5;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -497,7 +497,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT('ASN ', sas) AS sas, SUM(ibyt) AS inbound_bytes, SUM(obyt) AS outbound_bytes\r\nFROM tabela_netflow\r\nGROUP BY sas\r\nORDER BY inbound_bytes + outbound_bytes DESC\r\nLIMIT 5;",
+          "rawSql": "SELECT CONCAT('ASN ', sas) AS sas, SUM(ibyt) AS inbound_bytes, SUM(obyt) AS outbound_bytes\r\nFROM tabela_netflow\r\nWHERE ra = '$DeviceAddr'\r\nGROUP BY sas\r\nORDER BY inbound_bytes + outbound_bytes DESC\r\nLIMIT 5;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -592,7 +592,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \r\n    SUM(CASE WHEN `inbound` > 0 THEN 1 ELSE 0 END) AS total_inbound,\r\n    SUM(CASE WHEN `outbound` > 0 THEN 1 ELSE 0 END) AS total_outbound\r\nFROM tabela_netflow;",
+          "rawSql": "SELECT \r\n    SUM(CASE WHEN `inbound` > 0 THEN 1 ELSE 0 END) AS total_inbound,\r\n    SUM(CASE WHEN `outbound` > 0 THEN 1 ELSE 0 END) AS total_outbound\r\nFROM tabela_netflow\r\nWHERE ra = '$DeviceAddr';",
           "refId": "A",
           "sql": {
             "columns": [
@@ -743,7 +743,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT sa, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE sa != '0.0.0.0'\r\nGROUP BY sa\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT sa, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE sa != '0.0.0.0' AND ra = '$DeviceAddr'\r\nGROUP BY sa\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -896,7 +896,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT ismc, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE ismc != '00:00:00:00:00:00'\r\nGROUP BY ismc\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT ismc, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE ismc != '00:00:00:00:00:00' AND ra = '$DeviceAddr'\r\nGROUP BY ismc\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1024,7 +1024,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT('Port ', CAST(sp AS CHAR)) AS porta, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE sp != 0\r\nGROUP BY porta\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT CONCAT('Port ', CAST(sp AS CHAR)) AS porta, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE sp != 0 AND ra = '$DeviceAddr'\r\nGROUP BY porta\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1152,7 +1152,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT da, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE da NOT IN ('0.0.0.0', '255.255.255.255')\r\nGROUP BY da\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT da, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE da NOT IN ('0.0.0.0', '255.255.255.255') AND ra = '$DeviceAddr'\r\nGROUP BY da\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1301,7 +1301,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT idmc, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE idmc NOT IN ('00:00:00:00:00:00', 'ff:ff:ff:ff:ff:ff')\r\nGROUP BY idmc\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT idmc, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE idmc NOT IN ('00:00:00:00:00:00', 'ff:ff:ff:ff:ff:ff') AND ra = '$DeviceAddr'\r\nGROUP BY idmc\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1429,7 +1429,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT('Port ', CAST(dp AS CHAR)) AS porta, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE dp != 0\r\nGROUP BY porta\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
+          "rawSql": "SELECT CONCAT('Port ', CAST(dp AS CHAR)) AS porta, SUM(ibyt) AS total_bytes_recebidos, SUM(obyt) AS total_bytes_enviados\r\nFROM tabela_netflow\r\nWHERE dp != 0 AND ra = '$DeviceAddr'\r\nGROUP BY porta\r\nORDER BY total_bytes_recebidos DESC\r\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1481,9 +1481,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "10.100.65.135",
-          "value": "10.100.65.135"
+          "selected": true,
+          "text": "10.100.65.254",
+          "value": "10.100.65.254"
         },
         "description": "Device IP",
         "hide": 0,
@@ -1492,12 +1492,18 @@
         "name": "DeviceAddr",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "10.100.65.135",
             "value": "10.100.65.135"
+          },
+          {
+            "selected": true,
+            "text": "10.100.65.254",
+            "value": "10.100.65.254"
           }
         ],
-        "query": "10.100.65.135",
+        "query": "10.100.65.135, 10.100.65.254",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       }
@@ -1511,6 +1517,6 @@
   "timezone": "",
   "title": "Net-Flow Monitoring",
   "uid": "Tk_2cwUIk",
-  "version": 3,
+  "version": 6,
   "weekStart": ""
 }
