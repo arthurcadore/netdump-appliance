@@ -1,6 +1,7 @@
 import os
 import csv
 import mysql.connector
+import time
 
 # Configurações do banco de dados MySQL
 db_config = {
@@ -13,19 +14,15 @@ db_config = {
 # Diretório contendo os arquivos CSV
 csv_dir = '/data/csv'
 
-# Conexão com o banco de dados MySQL
-conn = mysql.connector.connect(**db_config)
-cursor = conn.cursor()
-
 # Função para importar CSV para MySQL e excluir o arquivo original
-def import_csv_to_mysql(file_path):
+def import_csv_to_mysql(file_path, cursor):
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
         headers = next(csv_reader)  # Ler o cabeçalho
 
         # Verificar o número de colunas no cabeçalho
         if len(headers) != 48:
-            print(f'Header column count mismatch: {len(headers)} columns found. Expected 49.')
+            print(f'Header column count mismatch: {len(headers)} columns found. Expected 48.')
             return
 
         for row in csv_reader:
@@ -41,22 +38,29 @@ def import_csv_to_mysql(file_path):
                         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     '''
-                  #  print(f'Query parameters: {tuple(row)}')
                     cursor.execute(query, tuple(row))
                 except mysql.connector.Error as err:
                     print(f"Error: {err}")
             else:
-                print(f'Skipping row with incorrect number of columns: {len(row)} columns found. Expected 49. Row: {row}')
-    conn.commit()
-#    os.remove(file_path)
+                print(f'Skipping row with incorrect number of columns: {len(row)} columns found. Expected 48. Row: {row}')
     print(f'Imported {file_path} to MySQL and deleted the original file.')
+    os.remove(file_path)
 
-# Iterar sobre os arquivos no diretório /data/nfdump/csv
-for file_name in os.listdir(csv_dir):
-    if file_name.endswith('.csv'):
-        file_path = os.path.join(csv_dir, file_name)
-        import_csv_to_mysql(file_path)
+while True:
+    # Conexão com o banco de dados MySQL
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
 
-# Fechar conexão com o banco de dados MySQL
-cursor.close()
-conn.close()
+    # Iterar sobre os arquivos no diretório /data/csv
+    for file_name in os.listdir(csv_dir):
+        if file_name.endswith('.csv'):
+            file_path = os.path.join(csv_dir, file_name)
+            import_csv_to_mysql(file_path, cursor)
+
+    # Fechar conexão com o banco de dados MySQL
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    # Aguardar 30 segundos antes de executar novamente
+    time.sleep(30)
