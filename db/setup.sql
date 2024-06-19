@@ -61,11 +61,8 @@ CREATE TABLE tabela_netflow (
 -- );
 
 
--- Crie o usuário
 CREATE USER 'pythonConnector'@'%' IDENTIFIED BY 'Python@connect123';
 
--- Conceda privilégios ao usuário no banco de dados currentTS
 GRANT ALL PRIVILEGES ON netflow.* TO 'pythonConnector'@'%';
 
--- Atualize os privilégios
 FLUSH PRIVILEGES;

@@ -5,14 +5,12 @@ DB_USER="pythonConnector"
 DB_PASSWORD="Python@connect123"
 
 while ! mysqladmin ping -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" --silent; do
-    echo "Aguardando o banco de dados estar pronto..."
+    echo "Waiting for database be ready..."
     sleep 1
 done
 
-echo "O banco de dados está pronto para aceitar consultas."
+echo "The Database is ready!"
 
 python3 /data/nf2csv.py & 
 
-python3 /data/csv2db.py & 
-
-tail -f /dev/null 
+python3 /data/csv2db.py

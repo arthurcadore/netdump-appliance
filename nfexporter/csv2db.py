@@ -3,7 +3,6 @@ import csv
 import mysql.connector
 import time
 
-# Configurações do banco de dados MySQL
 db_config = {
     'host': 'database',
     'user': 'pythonConnector',
@@ -11,22 +10,19 @@ db_config = {
     'database': 'netflow'
 }
 
-# Diretório contendo os arquivos CSV
 csv_dir = '/data/csv'
 
-# Função para importar CSV para MySQL e excluir o arquivo original
 def import_csv_to_mysql(file_path, cursor):
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
-        headers = next(csv_reader)  # Ler o cabeçalho
+        headers = next(csv_reader) 
 
-        # Verificar o número de colunas no cabeçalho
         if len(headers) != 48:
             print(f'Header column count mismatch: {len(headers)} columns found. Expected 48.')
             return
 
         for row in csv_reader:
-            if len(row) == 48:  # Número de colunas na tabela
+            if len(row) == 48:
                 try:
                     query = '''
                         INSERT INTO tabela_netflow (
@@ -47,20 +43,16 @@ def import_csv_to_mysql(file_path, cursor):
     os.remove(file_path)
 
 while True:
-    # Conexão com o banco de dados MySQL
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
 
-    # Iterar sobre os arquivos no diretório /data/csv
     for file_name in os.listdir(csv_dir):
         if file_name.endswith('.csv'):
             file_path = os.path.join(csv_dir, file_name)
             import_csv_to_mysql(file_path, cursor)
 
-    # Fechar conexão com o banco de dados MySQL
     conn.commit()
     cursor.close()
     conn.close()
-
-    # Aguardar 30 segundos antes de executar novamente
+    
     time.sleep(30)
